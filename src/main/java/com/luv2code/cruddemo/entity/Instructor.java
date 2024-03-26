@@ -17,7 +17,7 @@ public class Instructor {
     @Column(name = "email")
     private String email;
     //set up mapping to InstructorDetail entity
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
     //define constructors

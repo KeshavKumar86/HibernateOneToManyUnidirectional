@@ -50,6 +50,7 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
+
     //define toString
 
     @Override
