@@ -4,6 +4,7 @@ import com.luv2code.cruddemo.dao.AppDAO;
 import com.luv2code.cruddemo.entity.Course;
 import com.luv2code.cruddemo.entity.Instructor;
 import com.luv2code.cruddemo.entity.InstructorDetail;
+import com.luv2code.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,23 +24,47 @@ public class CruddemoApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
-		return (abc) -> {
-			//createInstructor(appDAO);
-			//findInstructor(appDAO);
-			//deleteInstructor(appDAO);
-			//findInstructorDetail(appDAO);
-			//deleteInstructorDetail(appDAO);
-			//createInstructorWithCourses(appDAO);
-			//findInstructorWithCourses(appDAO);
-			//findCoursesForInstructor(appDAO);
-			//findInstructorWithCoursesJoinFetch(appDAO);
-			//updateInstructor(appDAO);
-			//updateCourse(appDAO);
-			//deleteInstructor(appDAO);
-			deleteCourse(appDAO);
-
-
+		return (runner) -> {
+					//createCourseAndReviews(appDAO);
+					//retrieveCourseAndReviews(appDAO);
+					  deleteCourseAndReviews(appDAO);
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+		int id = 11;
+		System.out.println("Deleting course id: " + id);
+		appDAO.deleteCourseById(id);
+		System.out.println("Done!");
+	}
+
+	private void retrieveCourseAndReviews(AppDAO appDAO) {
+		int id = 11;
+		System.out.println("Finding Course id: " + id);
+		Course course = appDAO.findCourseAndReviewsByCourseId(id);
+		//print the course
+		System.out.println(course);
+		//print the reviews
+		System.out.println(course.getReviews());
+		System.out.println("Done!");
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+		//create a course
+		Course course = new Course("Pacman - How to score one million points");
+		//add reviews
+		course.addReview(new Review("Great Course ... Loved it!"));
+		course.addReview(new Review("Cool course, job well done"));
+		course.addReview(new Review("What a dumb course, you are an idiot"));
+
+		//save the course and leverage the cascade all
+		System.out.println("Saving the course");
+		System.out.println(course);
+		System.out.println(course.getReviews());
+
+		appDAO.saveCourse(course);
+
+		System.out.println("Done!");
 	}
 
 	private void deleteCourse(AppDAO appDAO) {
