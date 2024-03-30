@@ -1,2 +1,2 @@
 # HibernateOneToOneMapping
-This project is about one to one mapping in hibernate.Here we have created 2 entities instructor and instructordetails and they have one to one relationship.
+This project is about Hibernate relationships like one to one, one to many,many to one.Here we have several entites and defined their relatinships and implemented crud functionalities.
